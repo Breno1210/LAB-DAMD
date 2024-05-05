@@ -1,9 +1,38 @@
 version: '3.8'
 
 services:
-  backend:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  java_app:
+    container_name: java_app
+    image: java_app:1.0.0
+    build: .
     ports:
       - "8080:8080"
+    environment:
+      - DATABASE_URL=jdbc:postgresql://dpg-coq1o1kf7o1s73e9dvdg-a.oregon-postgres.render.com/postgresqllabdamd
+      - DATABASE_USERNAME=postgresqllabdamd_user
+      - DATABASE_PASSWORD=marUk3NFGrJjq0bj8svBCPzKFb4iGUUd
+    depends_on:
+      - java_db
+
+  java_db:
+    container_name: java_db
+    image: postgres:12
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgresqllabdamd_user
+      POSTGRES_PASSWORD: marUk3NFGrJjq0bj8svBCPzKFb4iGUUd
+      POSTGRES_DB: postgresqllabdamd
+    volumes:
+      - ./data:/var/lib/postgresql/data
+
+volumes:
+  pgdata: {}
+
+#services:
+#  backend:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    ports:
+#      - "8080:8080"

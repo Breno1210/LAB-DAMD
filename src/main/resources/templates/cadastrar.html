@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
+
 <body>
     <header class="py-1 px-2">
         <div class="container">
@@ -13,9 +15,15 @@
                 <div class="grid-12">
                     <nav class="">
                         <ul class="menu">
-                            <li class="scroll-to-section"><a href="/"><h6 class="color-white">HOME</h6></a></li>
-                            <li class="scroll-to-section"><a href="/cadastrar"><h6 class="color-white">Registrar-se</h6></a></li>
-                            <li class="scroll-to-section"><a href="/login"><h6 class="color-white">Login</h6></a></li>
+                            <li class="scroll-to-section"><a href="/">
+                                    <h6 class="color-white">HOME</h6>
+                                </a></li>
+                            <li class="scroll-to-section"><a href="/cadastrar">
+                                    <h6 class="color-white">Registrar-se</h6>
+                                </a></li>
+                            <li class="scroll-to-section"><a href="/login">
+                                    <h6 class="color-white">Login</h6>
+                                </a></li>
                         </ul>
 
                     </nav>
@@ -33,27 +41,37 @@
                 <div class="flex-start-row">
                     <h5>Realize o cadastro aqui!</h5>
                 </div>
-                <div class="mt-2">
-                    <h6 class="flex-start-row">Nome <p class="color-red">*</p></h6>
-                    <input type="text">
-                </div>
-                <div class="mt-2">
-                    <h6 class="flex-start-row">Senha <p class="color-red">*</p></h6>
-                    <input type="text">
-                </div>
+                <div th:action="@{/api/usuario}" th:object="${usuario}" method="POST">
+                    <div class="mt-2">
+                        <h6 class="flex-start-row">Nome <p class="color-red">*</p>
+                        </h6>
+                        <input type="text" name="nome" th:field="*{nome}" required>
+                    </div>
+                    <div class="mt-2">
+                        <h6 class="flex-start-row">Senha <p class="color-red">*</p>
+                        </h6>
+                        <input type="text" name="senha" th:field="*{senha}" required>
+                    </div>
 
-                <div class="mt-3">
-                    <button class="btn-login w-100"><h6 class="text-center color-white">Cadastrar</button>
+
+                    <div class="mt-3">
+                        <button class="btn-login w-100" type="submit">
+                            <h6 class="text-center color-white">Cadastrar
+                        </button>
+                    </div>
                 </div>
 
                 <div class="mt-1">
                     <p class="text-center">Ja possui uma conta? </p>
-                    <a href="/login"><p class="text-center color-primary">Clique aqui para entrar agora!</p></a>
+                    <a href="/login">
+                        <p class="text-center color-primary">Clique aqui para entrar agora!</p>
+                    </a>
                 </div>
-                
+
             </div>
         </div>
     </section>
-    
+
 </body>
+
 </html>
